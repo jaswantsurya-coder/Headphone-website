@@ -83,12 +83,13 @@ export default function VideoSequence({ folderName = "frames" }: VideoSequencePr
           loop
           muted
           playsInline
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out contrast-[1.03] brightness-[0.97] saturate-[1.02] ${
-            activeVideo === "A" ? "opacity-100 z-10" : "opacity-0 z-0"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+            activeVideo === "A" ? "opacity-80 z-10" : "opacity-0 z-0"
           }`}
           style={{
             transform: "translate3d(0,0,0)",
             willChange: "transform, opacity",
+            filter: "brightness(0.82) contrast(1.08) saturate(1.05)",
           }}
         />
       )}
@@ -102,12 +103,13 @@ export default function VideoSequence({ folderName = "frames" }: VideoSequencePr
           loop
           muted
           playsInline
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out contrast-[1.03] brightness-[0.97] saturate-[1.02] ${
-            activeVideo === "B" ? "opacity-100 z-10" : "opacity-0 z-0"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${
+            activeVideo === "B" ? "opacity-80 z-10" : "opacity-0 z-0"
           }`}
           style={{
             transform: "translate3d(0,0,0)",
             willChange: "transform, opacity",
+            filter: "brightness(0.82) contrast(1.08) saturate(1.05)",
           }}
         />
       )}

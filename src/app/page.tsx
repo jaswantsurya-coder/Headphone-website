@@ -41,8 +41,8 @@ interface TabContent {
   badges: string[];
   ctaText: string;
   features: FeatureCard[];
-  layoutStyle: "left" | "right" | "center";
-  gradientOverlayClass: string;
+  layoutStyle: "left" | "center-left";
+  gradientOverlayStyle: string;
   typographyClass: string;
   showDiagram: boolean;
   hideTechnicalBackground: boolean;
@@ -86,7 +86,7 @@ const tabData: Record<ModelFolder, TabContent> = {
       }
     ],
     layoutStyle: "left",
-    gradientOverlayClass: "bg-gradient-to-r from-[#050505]/95 via-[#050505]/80 via-[#050505]/40 to-transparent",
+    gradientOverlayStyle: "radial-gradient(circle at 70% 45%, rgba(255,75,0,0.08), transparent 35%), linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 42%, rgba(0,0,0,0.10) 100%)",
     typographyClass: "font-display",
     showDiagram: true,
     hideTechnicalBackground: false
@@ -128,8 +128,8 @@ const tabData: Record<ModelFolder, TabContent> = {
         text: "Helps reduce sound leakage and keeps playback focused."
       }
     ],
-    layoutStyle: "right",
-    gradientOverlayClass: "bg-gradient-to-l from-[#050505]/95 via-[#050505]/80 via-[#050505]/40 to-transparent",
+    layoutStyle: "left",
+    gradientOverlayStyle: "radial-gradient(circle at 70% 45%, rgba(255,75,0,0.08), transparent 35%), linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 42%, rgba(0,0,0,0.10) 100%)",
     typographyClass: "font-sora tracking-tight",
     showDiagram: true,
     hideTechnicalBackground: false
@@ -170,8 +170,8 @@ const tabData: Record<ModelFolder, TabContent> = {
         text: "Clean product presentation suitable for a premium landing page."
       }
     ],
-    layoutStyle: "center",
-    gradientOverlayClass: "bg-[radial-gradient(circle_at_center,rgba(5,5,5,0.2)_0%,rgba(5,5,5,0.85)_75%,rgba(5,5,5,0.98)_100%)]",
+    layoutStyle: "center-left",
+    gradientOverlayStyle: "radial-gradient(circle at 50% 50%, rgba(255,75,0,0.05), transparent 45%), linear-gradient(90deg, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.05) 100%)",
     typographyClass: "font-display uppercase tracking-wide",
     showDiagram: false,
     hideTechnicalBackground: true
@@ -212,15 +212,22 @@ export default function Home() {
 
       {/* 1. HERO VIEWPORT */}
       <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center px-6 pt-28 pb-20">
-        {/* Full-bleed background video with reduced opacity */}
-        <div className="absolute inset-0 z-0 opacity-55 select-none pointer-events-none">
+        {/* Full-bleed background video: Clearly visible at native 80% opacity set inside VideoSequence */}
+        <div className="absolute inset-0 z-0 select-none pointer-events-none">
           <VideoSequence folderName={activeModel} />
         </div>
 
-        {/* Dynamic Gradient Overlay for contrast based on layout */}
+        {/* Dynamic Gradient Overlay: Scrim on the left, orange radial glow on the right */}
         <div
-          className={`absolute inset-0 z-10 pointer-events-none transition-all duration-700 ease-in-out ${activeTab.gradientOverlayClass}`}
+          className="absolute inset-0 z-10 pointer-events-none transition-all duration-700 ease-in-out"
+          style={{
+            background: activeTab.gradientOverlayStyle,
+            opacity: 1,
+          }}
         />
+
+        {/* Edge Vignette */}
+        <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_55%,rgba(0,0,0,0.25)_100%)]" />
 
         {/* Dynamic decorative tech grid lines */}
         <div
@@ -250,20 +257,18 @@ export default function Home() {
         <div className="relative z-20 max-w-7xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center min-h-[calc(100vh-6rem)] mt-12 md:mt-16">
           <motion.div
             key={activeModel}
-            initial={{
-              opacity: 0,
-              x: activeTab.layoutStyle === "left" ? -35 : activeTab.layoutStyle === "right" ? 35 : 0,
-              y: activeTab.layoutStyle === "center" ? 35 : 0
-            }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className={`w-full max-w-[720px] transition-all duration-700 ease-in-out ${
-              activeTab.layoutStyle === "left"
-                ? "mr-auto ml-0 text-left items-start"
-                : activeTab.layoutStyle === "right"
-                ? "ml-auto mr-0 text-left md:text-right items-start md:items-end"
-                : "mx-auto text-center items-center"
-            } flex flex-col backdrop-blur-[6px] bg-[#050505]/30 p-6 md:p-10 rounded-[32px] border border-white/5 shadow-2xl`}
+            className="w-full max-w-[640px] flex flex-col text-left items-start sm:text-center sm:items-center sm:mx-auto md:text-left md:items-start md:ml-0 md:mr-auto p-6 md:p-8 rounded-[24px] transition-all duration-700 ease-in-out"
+            style={{
+              background: activeModel === "frames-video" ? "rgba(0,0,0,0.18)" : "rgba(0,0,0,0.32)",
+              backdropFilter: activeModel === "frames-video" ? "blur(4px)" : "blur(8px)",
+              WebkitBackdropFilter: activeModel === "frames-video" ? "blur(4px)" : "blur(8px)",
+              borderColor: "rgba(255,255,255,0.08)",
+              borderWidth: activeModel === "frames-video" ? "0px" : "1px",
+              boxShadow: activeModel === "frames-video" ? "none" : "0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3)",
+            }}
           >
             {/* Eyebrow badge */}
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#050505]/80 border border-[#ff4b00]/25 mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(255,75,0,0.05)]">
@@ -274,7 +279,7 @@ export default function Home() {
             </div>
 
             {/* Headline */}
-            <h1 className={`text-[clamp(2.5rem,6vw,5.5rem)] font-extrabold tracking-tight leading-[1.05] text-[#f5f5f5] drop-shadow-xl ${activeTab.typographyClass}`}>
+            <h1 className={`text-[clamp(3rem,7vw,6.5rem)] font-extrabold tracking-tight leading-[1.05] text-[#f5f5f5] drop-shadow-xl ${activeTab.typographyClass}`}>
               {activeTab.headline}
             </h1>
 
@@ -284,19 +289,13 @@ export default function Home() {
             </h2>
 
             {/* Body Description */}
-            <p className="text-base md:text-[17px] mt-5 text-[#a1a1a1] leading-[1.6] font-light max-w-2xl drop-shadow-md">
+            <p className="text-base md:text-[17px] mt-5 text-[#b8b8b8] leading-[1.6] font-light max-w-2xl drop-shadow-md">
               {activeTab.body}
             </p>
 
             {/* Action Buttons */}
             <div
-              className={`flex flex-col sm:flex-row items-center gap-4 mt-8 w-full sm:w-auto ${
-                activeTab.layoutStyle === "left"
-                  ? "justify-start"
-                  : activeTab.layoutStyle === "right"
-                  ? "justify-start md:justify-end"
-                  : "justify-center"
-              }`}
+              className="flex flex-col sm:flex-row items-center gap-4 mt-8 w-full sm:w-auto justify-start sm:justify-center md:justify-start"
             >
               <a
                 href="#engineering"
@@ -315,13 +314,7 @@ export default function Home() {
 
             {/* Technical Badges */}
             <div
-              className={`mt-10 flex flex-wrap gap-2.5 w-full ${
-                activeTab.layoutStyle === "left"
-                  ? "justify-start"
-                  : activeTab.layoutStyle === "right"
-                  ? "justify-start md:justify-end"
-                  : "justify-center"
-              }`}
+              className="mt-10 flex flex-wrap gap-2.5 w-full justify-start sm:justify-center md:justify-start"
             >
               {activeTab.badges.map((badge, index) => (
                 <div
@@ -361,7 +354,7 @@ export default function Home() {
                 )}
               </h2>
               <div className="w-16 h-[2px] bg-[#ff4b00] mt-8 mb-8" />
-              <p className="text-[16px] md:text-[18px] text-[#a1a1a1] leading-[1.6] font-light max-w-md">
+              <p className="text-[16px] md:text-[18px] text-[#b8b8b8] leading-[1.6] font-light max-w-md">
                 {activeTab.id === "frames-30mm" ? (
                   "The 30mm precision driver is tuned to deliver punchy low-end, balanced mids, and crisp highs without adding unnecessary weight. A lightweight diaphragm reacts quickly to transients, while the neodymium magnet system keeps output stable and controlled."
                 ) : activeTab.id === "frames" ? (
@@ -389,7 +382,7 @@ export default function Home() {
                     <h3 className="text-xl font-bold tracking-tight text-[#f5f5f5] font-display">
                       {card.title}
                     </h3>
-                    <p className="text-sm text-[#a1a1a1] mt-4 leading-[1.6] font-light">
+                    <p className="text-sm text-[#b8b8b8] mt-4 leading-[1.6] font-light">
                       {card.text}
                     </p>
                   </div>
@@ -417,7 +410,7 @@ export default function Home() {
           <h2 className="text-[clamp(2.2rem,5vw,4.8rem)] font-extrabold tracking-tight leading-[1.1] mt-4 mb-8 font-display text-[#f5f5f5]">
             Acoustic Technology
           </h2>
-          <p className="text-base md:text-[18px] text-[#a1a1a1] max-w-2xl mx-auto font-light leading-[1.6] mb-16">
+          <p className="text-base md:text-[18px] text-[#b8b8b8] max-w-2xl mx-auto font-light leading-[1.6] mb-16">
             Explore the advanced mechanical structure that coordinates magnetic fields, coils, and air containment to generate pure, undistorted audio transients.
           </p>
 
@@ -435,11 +428,11 @@ export default function Home() {
                 <div className="md:col-span-4 text-left space-y-8">
                   <div className="border-l-2 border-[#ff4b00] pl-4">
                     <h4 className="text-sm font-bold uppercase tracking-wider text-white">01 / Magnetic Flux</h4>
-                    <p className="text-xs text-[#a1a1a1] mt-1 font-light">Concentrated neodymium field provides high power output with extremely low spatial distortion.</p>
+                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Concentrated neodymium field provides high power output with extremely low spatial distortion.</p>
                   </div>
                   <div className="border-l-2 border-white/25 pl-4 hover:border-[#ff4b00] transition-colors">
                     <h4 className="text-sm font-bold uppercase tracking-wider text-white">02 / Heat Dispersion</h4>
-                    <p className="text-xs text-[#a1a1a1] mt-1 font-light">Tuned exhaust ports direct thermal energy away from the copper coils, maintaining structural rigidity.</p>
+                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Tuned exhaust ports direct thermal energy away from the copper coils, maintaining structural rigidity.</p>
                   </div>
                 </div>
 
@@ -459,11 +452,11 @@ export default function Home() {
                 <div className="md:col-span-4 text-left space-y-8">
                   <div className="border-l-2 border-white/25 pl-4 hover:border-[#ff4b00] transition-colors">
                     <h4 className="text-sm font-bold uppercase tracking-wider text-white">03 / Resonance Filter</h4>
-                    <p className="text-xs text-[#a1a1a1] mt-1 font-light">Lightweight composite barriers cancel micro-resonance, allowing high frequencies to stay perfectly linear.</p>
+                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Lightweight composite barriers cancel micro-resonance, allowing high frequencies to stay perfectly linear.</p>
                   </div>
                   <div className="border-l-2 border-white/25 pl-4 hover:border-[#ff4b00] transition-colors">
                     <h4 className="text-sm font-bold uppercase tracking-wider text-white">04 / Venting Geometry</h4>
-                    <p className="text-xs text-[#a1a1a1] mt-1 font-light">Aerodynamic rear ports optimize airflow resistance, reducing diaphragm counter-pressure.</p>
+                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Aerodynamic rear ports optimize airflow resistance, reducing diaphragm counter-pressure.</p>
                   </div>
                 </div>
               </div>
@@ -473,7 +466,7 @@ export default function Home() {
               <div className="flex flex-col items-center justify-center text-center space-y-6">
                 <Headphones size={80} className="text-[#ff4b00] animate-pulse animate-duration-1000" />
                 <h3 className="text-2xl md:text-3xl font-extrabold text-white font-display">Pure Acoustic Comfort</h3>
-                <p className="text-[#a1a1a1] max-w-xl font-light text-sm md:text-base leading-relaxed">
+                <p className="text-[#b8b8b8] max-w-xl font-light text-sm md:text-base leading-relaxed">
                   JBL Live M6 is engineered for pure high-fidelity output. Without cables or clutter, its sleek matte finish is complemented by signature copper accents, creating a timeless look that fits any modern workspace or lifestyle.
                 </p>
               </div>
@@ -495,7 +488,7 @@ export default function Home() {
                 Tuned for focus, energy, and detail.
               </h2>
               <div className="w-16 h-[2px] bg-[#ff4b00] mt-8 mb-8" />
-              <p className="text-[16px] md:text-[18px] text-[#a1a1a1] leading-[1.6] font-light">
+              <p className="text-[16px] md:text-[18px] text-[#b8b8b8] leading-[1.6] font-light">
                 Designed for modern wireless listening, the JBL Live M6 balances deep bass impact with vocal clarity and smooth highs. It is made for music, movies, calls, and long daily listening sessions.
               </p>
             </div>
@@ -528,7 +521,7 @@ export default function Home() {
                       <h4 className="text-lg font-bold text-white tracking-wide font-display">
                         {item.title}
                       </h4>
-                      <p className="text-sm text-[#a1a1a1] mt-1 font-light">
+                      <p className="text-sm text-[#b8b8b8] mt-1 font-light">
                         {item.desc}
                       </p>
                     </div>
@@ -576,7 +569,7 @@ export default function Home() {
                 ].map((item, idx) => (
                   <div key={idx} className="py-4 flex justify-between items-center text-sm">
                     <span className="font-semibold text-white/95">{item.label}</span>
-                    <span className="font-light text-[#a1a1a1] text-right ml-4">{item.val}</span>
+                    <span className="font-light text-[#b8b8b8] text-right ml-4">{item.val}</span>
                   </div>
                 ))}
               </div>
@@ -600,7 +593,7 @@ export default function Home() {
                 ].map((item, idx) => (
                   <div key={idx} className="py-4 flex justify-between items-center text-sm">
                     <span className="font-semibold text-white/95">{item.label}</span>
-                    <span className="font-light text-[#a1a1a1] text-right ml-4">{item.val}</span>
+                    <span className="font-light text-[#b8b8b8] text-right ml-4">{item.val}</span>
                   </div>
                 ))}
               </div>
@@ -621,7 +614,7 @@ export default function Home() {
           <h2 className="text-[clamp(2.2rem,5vw,4.8rem)] font-extrabold tracking-tight leading-[1.1] mt-4 mb-6 font-display text-white">
             Built for everyday immersion.
           </h2>
-          <p className="text-base md:text-[18px] text-[#a1a1a1] max-w-xl mx-auto font-light leading-[1.6] mb-12">
+          <p className="text-base md:text-[18px] text-[#b8b8b8] max-w-xl mx-auto font-light leading-[1.6] mb-12">
             Experience a compact driver system designed for clean sound, lightweight comfort, and premium wireless listening.
           </p>
 
@@ -651,7 +644,7 @@ export default function Home() {
                 "1-year limited warranty",
                 "Free shipping on launch orders"
               ].map((benefit, idx) => (
-                <li key={idx} className="flex items-center text-xs text-[#a1a1a1] font-light">
+                <li key={idx} className="flex items-center text-xs text-[#b8b8b8] font-light">
                   <Check size={14} className="text-[#ff4b00] mr-3 shrink-0" />
                   <span>{benefit}</span>
                 </li>
@@ -679,7 +672,7 @@ export default function Home() {
             <h4 className="text-white text-sm font-bold tracking-tight mb-4 font-display">
               JBL Live M6
             </h4>
-            <p className="text-xs font-light leading-relaxed max-w-xs text-[#a1a1a1]">
+            <p className="text-xs font-light leading-relaxed max-w-xs text-[#b8b8b8]">
               Pushing the boundaries of acoustics to engineer an unmatched compact listening experience.
             </p>
           </div>
