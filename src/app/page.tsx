@@ -72,16 +72,16 @@ const tabData: Record<ModelFolder, TabContent> = {
       {
         iconName: "Sliders",
         title: "Copper voice coil",
-        text: "Precision winding improves signal response and reduces distortion."
+        text: "Precision winding improves signal response for reduced distortion."
       },
       {
         iconName: "Zap",
         title: "Neodymium magnet",
-        text: "Compact magnetic strength for efficient, controlled output."
+        text: "Compact magnetic strength for efficient, stable magnetic output."
       },
       {
         iconName: "Activity",
-        title: "Tuned airflow",
+        title: "Controlled airflow",
         text: "Internal acoustic airflow helps bass stay tight and balanced."
       }
     ],
@@ -435,7 +435,7 @@ export default function Home() {
             Acoustic Technology
           </h2>
           <p className="text-base md:text-[18px] text-[#b8b8b8] max-w-2xl mx-auto font-light leading-[1.6] mb-16">
-            Explore the advanced mechanical structure that coordinates magnetic fields, coils, and air containment to generate pure, undistorted audio transients.
+            Explore the advanced mechanical structure that coordinates magnetic fields, coils, and air containment to deliver stable magnetic output and cleaner transients.
           </p>
 
           {/* Technical Diagram or Cinematic Showroom depending on active tab */}
@@ -476,11 +476,11 @@ export default function Home() {
                 <div className="md:col-span-4 text-left space-y-8">
                   <div className="border-l-2 border-white/25 pl-4 hover:border-[#ff4b00] transition-colors">
                     <h4 className="text-sm font-bold uppercase tracking-wider text-white">03 / Resonance Filter</h4>
-                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Lightweight composite barriers cancel micro-resonance, allowing high frequencies to stay perfectly linear.</p>
+                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Lightweight composite barriers achieve reduced micro-resonance, allowing high frequencies to maintain a balanced acoustic response.</p>
                   </div>
                   <div className="border-l-2 border-white/25 pl-4 hover:border-[#ff4b00] transition-colors">
                     <h4 className="text-sm font-bold uppercase tracking-wider text-white">04 / Venting Geometry</h4>
-                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Aerodynamic rear ports optimize airflow resistance, reducing diaphragm counter-pressure.</p>
+                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Aerodynamic rear ports optimize airflow resistance, ensuring controlled airflow and reducing diaphragm counter-pressure.</p>
                   </div>
                 </div>
               </div>
@@ -489,9 +489,9 @@ export default function Home() {
             <div className="relative max-w-5xl mx-auto rounded-3xl p-8 md:p-16 overflow-hidden border border-[#ff4b00]/15 bg-gradient-to-b from-[#0A0A0C] to-[#050505] shadow-[0_0_50px_rgba(255,75,0,0.08)]">
               <div className="flex flex-col items-center justify-center text-center space-y-6">
                 <Headphones size={80} className="text-[#ff4b00] animate-pulse animate-duration-1000" />
-                <h3 className="text-2xl md:text-3xl font-extrabold text-white font-display">Pure Acoustic Comfort</h3>
+                <h3 className="text-2xl md:text-3xl font-extrabold text-white font-display">Optimized Acoustic Comfort</h3>
                 <p className="text-[#b8b8b8] max-w-xl font-light text-sm md:text-base leading-relaxed">
-                  JBL Live M6 is engineered for pure high-fidelity output. Without cables or clutter, its sleek matte finish is complemented by signature copper accents, creating a timeless look that fits any modern workspace or lifestyle.
+                  JBL Live M6 is engineered for a balanced acoustic response with reduced distortion. Without cables or clutter, its sleek matte finish is complemented by signature copper accents, creating a timeless look that fits any modern workspace or lifestyle.
                 </p>
               </div>
             </div>
@@ -639,7 +639,7 @@ export default function Home() {
             Built for everyday immersion.
           </h2>
           <p className="text-base md:text-[18px] text-[#b8b8b8] max-w-xl mx-auto font-light leading-[1.6] mb-12">
-            Experience a premium wireless headphone experience designed for clean sound, lightweight comfort, and immersive listening.
+            Experience premium wireless headphones designed for clean sound, lightweight comfort, and immersive daily listening.
           </p>
 
           {/* Checkout Card */}
@@ -647,15 +647,20 @@ export default function Home() {
             <span className="text-xs text-[#ff4b00] uppercase tracking-widest font-bold font-sans">
               Limited Pre-Order
             </span>
-            <div className="flex items-baseline justify-between mt-4">
+            <div className="flex items-end justify-between mt-4">
               <h3 className="text-3xl font-extrabold text-[#f5f5f5] font-display">
                 JBL Live M6
               </h3>
-              <div className="text-right">
-                <span className="text-sm text-white/40 line-through mr-2">$149</span>
-                <span className="text-3xl font-extrabold text-[#ff4b00] font-display">
-                  $129
+              <div className="text-right flex flex-col items-end">
+                <span className="text-[10px] font-bold text-[#ff4b00] uppercase tracking-widest mb-1">
+                  Launch Price
                 </span>
+                <div className="flex items-baseline space-x-2">
+                  <span className="text-sm text-white/40 line-through">$149</span>
+                  <span className="text-3xl font-extrabold text-[#ff4b00] font-display">
+                    $129
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -691,43 +696,53 @@ export default function Home() {
 
       {/* 7. FOOTER */}
       <footer className="relative z-20 bg-[#050505] text-white/40 border-t border-white/5 py-16">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-8">
           <div>
-            <h4 className="text-white text-sm font-bold tracking-tight mb-4 font-display">
-              JBL Live M6
+            <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4 font-sans">
+              Concept
             </h4>
-            <p className="text-xs font-light leading-relaxed max-w-xs text-[#b8b8b8]">
-              Pushing the boundaries of acoustics to engineer an unmatched compact listening experience.
-            </p>
+            <ul className="space-y-2 text-xs font-light">
+              <li><span className="text-white/60">Overview</span></li>
+              <li><span className="text-white/60">Inspiration</span></li>
+              <li><span className="text-white/60">Vision</span></li>
+            </ul>
           </div>
           <div>
             <h4 className="text-[#ff4b00] text-xs font-bold uppercase tracking-widest mb-4 font-sans">
-              Technology
+              Design System
             </h4>
             <ul className="space-y-2 text-xs font-light">
-              <li><a href="#engineering" className="hover:text-white transition-colors">Acoustic Engineering</a></li>
-              <li><a href="#acoustics" className="hover:text-white transition-colors">Precision Drivers</a></li>
-              <li><a href="#noise-control" className="hover:text-white transition-colors">Sound Profile</a></li>
+              <li><span className="text-white/60">Typography</span></li>
+              <li><span className="text-white/60">Colors</span></li>
+              <li><span className="text-white/60">Components</span></li>
             </ul>
           </div>
           <div>
             <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4 font-sans">
-              Support
+              Engineering
             </h4>
             <ul className="space-y-2 text-xs font-light">
-              <li><a href="#" className="hover:text-white transition-colors">Product Registration</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">User Manuals</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Warranty & Repairs</a></li>
+              <li><a href="#engineering" className="hover:text-white transition-colors">Acoustic Driver</a></li>
+              <li><a href="#specs" className="hover:text-white transition-colors">Specifications</a></li>
+              <li><a href="#acoustics" className="hover:text-white transition-colors">Controlled Airflow</a></li>
             </ul>
           </div>
           <div>
             <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4 font-sans">
-              Corporate
+              Prototype
             </h4>
             <ul className="space-y-2 text-xs font-light">
-              <li><a href="#" className="hover:text-white transition-colors">About JBL</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Sustainability</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+              <li><a href="#engineering" className="hover:text-white transition-colors">3D Interactive</a></li>
+              <li><a href="#buy" className="hover:text-white transition-colors">Cinematic Showcase</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4 font-sans">
+              Contact
+            </h4>
+            <ul className="space-y-2 text-xs font-light">
+              <li><span className="text-white/60">Feedback</span></li>
+              <li><span className="text-white/60">Portfolio</span></li>
             </ul>
           </div>
         </div>
