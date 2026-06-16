@@ -6,8 +6,11 @@ import { Menu, X } from "lucide-react";
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       if (window.scrollY > 20) {
         setIsScrolled(true);
@@ -16,8 +19,18 @@ export default function Navbar() {
       }
     };
 
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const navLinks = [
@@ -44,67 +57,97 @@ export default function Navbar() {
           JBL <span className="font-light text-[#ff4b00] ml-1 text-sm tracking-widest uppercase">Live M6</span>
         </a>
 
-        {/* Center: Desktop Navigation Links */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-[11px] uppercase text-white/60 hover:text-white transition-colors tracking-widest font-bold font-sans"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+        {!mounted ? (
+          /* Server-side / Initial client render fallback (desktop only, to prevent duplication in HTML output) */
+          <>
+            {/* Center: Desktop Navigation Links */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-[11px] uppercase text-white/60 hover:text-white transition-colors tracking-widest font-bold font-sans"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
 
-        {/* Right: CTA Button */}
-        <div className="hidden md:flex items-center">
-          <a
-            href="#buy"
-            className="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider text-white bg-[#ff4b00] hover:bg-[#ff621f] hover:shadow-[0_0_15px_rgba(255,75,0,0.4)] transition-all duration-300"
+            {/* Right: CTA Button */}
+            <div className="hidden md:flex items-center">
+              <a
+                href="#buy"
+                className="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider text-white bg-[#ff4b00] hover:bg-[#ff621f] hover:shadow-[0_0_15px_rgba(255,75,0,0.4)] transition-all duration-300"
+              >
+                Pre-order
+              </a>
+            </div>
+
+            {/* Hidden mobile trigger element to prevent layout shift during mount */}
+            <div className="md:hidden w-5 h-5" />
+          </>
+        ) : !isMobile ? (
+          /* Desktop Navigation (Client Rendered) */
+          <>
+            {/* Center: Desktop Navigation Links */}
+            <div className="flex items-center space-x-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-[11px] uppercase text-white/60 hover:text-white transition-colors tracking-widest font-bold font-sans"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+
+            {/* Right: CTA Button */}
+            <div className="flex items-center">
+              <a
+                href="#buy"
+                className="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider text-white bg-[#ff4b00] hover:bg-[#ff621f] hover:shadow-[0_0_15px_rgba(255,75,0,0.4)] transition-all duration-300"
+              >
+                Pre-order
+              </a>
+            </div>
+          </>
+        ) : (
+          /* Mobile Navigation Toggle (Client Rendered) */
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="text-white/80 hover:text-white transition-colors"
+            aria-label="Toggle Menu"
           >
-            Pre-order
-          </a>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden text-white/80 hover:text-white transition-colors"
-          aria-label="Toggle Menu"
-        >
-          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        )}
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-[#050505]/95 backdrop-blur-lg border-b border-white/5 transition-all duration-300 ease-in-out ${
-          isMobileMenuOpen
-            ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 -translate-y-2 pointer-events-none"
-        }`}
-      >
-        <div className="px-6 py-8 flex flex-col space-y-6">
-          {navLinks.map((link) => (
+      {/* Mobile Menu Dropdown (Client Rendered only) */}
+      {mounted && isMobile && isMobileMenuOpen && (
+        <div className="absolute top-full left-0 right-0 bg-[#050505]/95 backdrop-blur-lg border-b border-white/5">
+          <div className="px-6 py-8 flex flex-col space-y-6">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-xs uppercase text-white/75 hover:text-white transition-colors tracking-widest font-bold"
+              >
+                {link.label}
+              </a>
+            ))}
             <a
-              key={link.label}
-              href={link.href}
+              href="#buy"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-xs uppercase text-white/75 hover:text-white transition-colors tracking-widest font-bold"
+              className="w-full text-center px-4 py-3 rounded-full text-xs font-bold uppercase tracking-widest bg-[#ff4b00] text-white hover:bg-[#ff621f] transition-all"
             >
-              {link.label}
+              Pre-order
             </a>
-          ))}
-          <a
-            href="#buy"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="w-full text-center px-4 py-3 rounded-full text-xs font-bold uppercase tracking-widest bg-[#ff4b00] text-white hover:bg-[#ff621f] transition-all"
-          >
-            Pre-order
-          </a>
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }

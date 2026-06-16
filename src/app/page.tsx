@@ -639,7 +639,7 @@ export default function Home() {
             Built for everyday immersion.
           </h2>
           <p className="text-base md:text-[18px] text-[#b8b8b8] max-w-xl mx-auto font-light leading-[1.6] mb-12">
-            Experience a compact driver system designed for clean sound, lightweight comfort, and premium wireless listening.
+            Experience a premium wireless headphone experience designed for clean sound, lightweight comfort, and immersive listening.
           </p>
 
           {/* Checkout Card */}
@@ -733,8 +733,7 @@ export default function Home() {
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between text-[11px] font-light">
           <div className="flex flex-col space-y-1">
-            <span>© 2026 Harman International Industries, Incorporated. All rights reserved.</span>
-            <span className="text-white/20 italic">Concept product page created for design and development showcase.</span>
+            <span>JBL Live M6 concept product page created for design and development showcase.</span>
           </div>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
