@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Sora } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,12 +8,18 @@ const inter = Inter({
   display: "swap",
 });
 
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "JBL Tour M6 | Silence, Perfected.",
-  description: "Experience the flagship JBL Tour M6 wireless noise-cancelling headphones. Cinematic sound, adaptive ANC, and premium comfort, precision-engineered for focus.",
+  title: "JBL Live M6 | 30mm Precision Driver",
+  description: "Experience the premium JBL Live M6 dynamic driver audio system. Compact size. Full-scale sound, precision-engineered for daily immersion.",
   openGraph: {
-    title: "JBL Tour M6 | Silence, Perfected.",
-    description: "Experience the flagship JBL Tour M6 wireless noise-cancelling headphones. Cinematic sound, adaptive ANC, and premium comfort, precision-engineered for focus.",
+    title: "JBL Live M6 | 30mm Precision Driver",
+    description: "Experience the premium JBL Live M6 dynamic driver audio system. Compact size. Full-scale sound, precision-engineered for daily immersion.",
     type: "website",
   },
 };
@@ -26,9 +32,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} h-full antialiased dark`}
+      className={`${inter.variable} ${sora.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full bg-[#050505] text-white/90 selection:bg-[#0050FF]/30 selection:text-white font-sans overflow-x-hidden">{children}</body>
+      <body className="min-h-full bg-[#050505] text-[#f5f5f5] selection:bg-[#ff4b00]/30 selection:text-white font-sans overflow-x-hidden">{children}</body>
     </html>
   );
 }

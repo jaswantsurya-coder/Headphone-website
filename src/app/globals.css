@@ -2,17 +2,17 @@
 
 @theme {
   --color-background: #050505;
-  --color-foreground: rgba(255, 255, 255, 0.9);
-  --color-brand-bg: #050505;
+  --color-foreground: #f5f5f5;
   --color-brand-bg-secondary: #0A0A0C;
-  --color-brand-blue: #0050FF;
-  --color-brand-cyan: #00D6FF;
+  --color-brand-orange: #ff4b00;
+  --color-brand-gray: #a1a1a1;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+  --font-display: var(--font-sora), var(--font-inter), sans-serif;
 }
 
 body {
   background-color: #050505;
-  color: rgba(255, 255, 255, 0.9);
+  color: #f5f5f5;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -33,5 +33,6 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0050FF;
+  background: #ff4b00;
 }
+

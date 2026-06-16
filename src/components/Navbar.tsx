@@ -21,11 +21,10 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "Overview", href: "#overview" },
-    { label: "Technology", href: "#technology" },
-    { label: "Noise Cancelling", href: "#anc" },
+    { label: "Engineering", href: "#engineering" },
+    { label: "Acoustics", href: "#acoustics" },
+    { label: "Noise Control", href: "#noise-control" },
     { label: "Specs", href: "#specs" },
-    { label: "Buy", href: "#buy" },
   ];
 
   return (
@@ -40,9 +39,9 @@ export default function Navbar() {
         {/* Left: Brand */}
         <a
           href="#"
-          className="text-white text-lg font-bold tracking-tight hover:opacity-80 transition-opacity"
+          className="text-white text-lg font-extrabold tracking-tight hover:opacity-90 transition-opacity font-display"
         >
-          JBL <span className="font-light text-white/50 ml-1 text-sm tracking-widest">Tour M6</span>
+          JBL <span className="font-light text-[#ff4b00] ml-1 text-sm tracking-widest uppercase">Live M6</span>
         </a>
 
         {/* Center: Desktop Navigation Links */}
@@ -51,7 +50,7 @@ export default function Navbar() {
             <a
               key={link.label}
               href={link.href}
-              className="text-xs text-white/60 hover:text-white transition-colors tracking-wide font-medium"
+              className="text-[11px] uppercase text-white/60 hover:text-white transition-colors tracking-widest font-bold font-sans"
             >
               {link.label}
             </a>
@@ -62,11 +61,9 @@ export default function Navbar() {
         <div className="hidden md:flex items-center">
           <a
             href="#buy"
-            className="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-xs font-medium text-white rounded-full group bg-gradient-to-br from-[#0050FF] to-[#00D6FF] group-hover:from-[#0050FF] group-hover:to-[#00D6FF] hover:text-white focus:ring-2 focus:outline-none focus:ring-[#00D6FF]/50 transition-all"
+            className="px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider text-white bg-[#ff4b00] hover:bg-[#ff621f] hover:shadow-[0_0_15px_rgba(255,75,0,0.4)] transition-all duration-300"
           >
-            <span className="relative px-4 py-1.5 transition-all ease-in duration-75 bg-[#050505] rounded-full group-hover:bg-opacity-0">
-              Experience Tour M6
-            </span>
+            Pre-order
           </a>
         </div>
 
@@ -94,7 +91,7 @@ export default function Navbar() {
               key={link.label}
               href={link.href}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="text-sm text-white/75 hover:text-white transition-colors tracking-wide font-medium"
+              className="text-xs uppercase text-white/75 hover:text-white transition-colors tracking-widest font-bold"
             >
               {link.label}
             </a>
@@ -102,9 +99,9 @@ export default function Navbar() {
           <a
             href="#buy"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="w-full text-center px-4 py-2.5 rounded-full text-xs font-semibold bg-gradient-to-r from-[#0050FF] to-[#00D6FF] text-white hover:brightness-110 transition-all shadow-[0_0_15px_rgba(0,80,255,0.3)]"
+            className="w-full text-center px-4 py-3 rounded-full text-xs font-bold uppercase tracking-widest bg-[#ff4b00] text-white hover:bg-[#ff621f] transition-all"
           >
-            Experience Tour M6
+            Pre-order
           </a>
         </div>
       </div>
