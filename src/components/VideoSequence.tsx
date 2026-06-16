@@ -116,7 +116,7 @@ export default function VideoSequence({ folderName = "frames" }: VideoSequencePr
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent z-20 pointer-events-none" />
       
       {/* Subtle radial ambient glow behind headphones */}
-      <div className="absolute pointer-events-none w-[60vw] h-[60vw] rounded-full bg-gradient-radial from-[#0050FF]/5 to-transparent blur-[120px] mix-blend-screen opacity-60 z-0" />
+      <div className="absolute pointer-events-none w-[60vw] h-[60vw] rounded-full bg-[radial-gradient(circle,rgba(255,75,0,0.06)_0%,transparent_70%)] blur-[120px] mix-blend-screen opacity-70 z-0" />
     </div>
   );
 }

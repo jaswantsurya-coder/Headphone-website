@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, Sora, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,11 +14,17 @@ const sora = Sora({
   display: "swap",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "JBL Live M6 | 30mm Precision Driver",
+  title: "JBL Live M6 | Premium Wireless Headphones",
   description: "Experience the premium JBL Live M6 dynamic driver audio system. Compact size. Full-scale sound, precision-engineered for daily immersion.",
   openGraph: {
-    title: "JBL Live M6 | 30mm Precision Driver",
+    title: "JBL Live M6 | Premium Wireless Headphones",
     description: "Experience the premium JBL Live M6 dynamic driver audio system. Compact size. Full-scale sound, precision-engineered for daily immersion.",
     type: "website",
   },
@@ -32,7 +38,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${sora.variable} h-full antialiased dark`}
+      className={`${inter.variable} ${sora.variable} ${spaceGrotesk.variable} h-full antialiased dark`}
     >
       <body className="min-h-full bg-[#050505] text-[#f5f5f5] selection:bg-[#ff4b00]/30 selection:text-white font-sans overflow-x-hidden">{children}</body>
     </html>

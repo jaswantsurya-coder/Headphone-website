@@ -7,7 +7,8 @@
   --color-brand-orange: #ff4b00;
   --color-brand-gray: #a1a1a1;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui;
-  --font-display: var(--font-sora), var(--font-inter), sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-sora), sans-serif;
+  --font-sora: var(--font-sora), sans-serif;
 }
 
 body {
