@@ -22,10 +22,10 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "JBL Live M6 | Premium Wireless Headphones",
-  description: "Experience the premium JBL Live M6 wireless headphone experience. Compact size, full-scale sound, precision-engineered for daily immersion.",
+  description: "Experience premium wireless headphones designed for clean sound, lightweight comfort, and immersive daily listening.",
   openGraph: {
     title: "JBL Live M6 | Premium Wireless Headphones",
-    description: "Experience the premium JBL Live M6 wireless headphone experience. Compact size, full-scale sound, precision-engineered for daily immersion.",
+    description: "Experience premium wireless headphones designed for clean sound, lightweight comfort, and immersive daily listening.",
     type: "website",
   },
 };

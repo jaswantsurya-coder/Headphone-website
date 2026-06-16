@@ -22,22 +22,17 @@ export default function VideoSequence({ folderName = "frames" }: VideoSequencePr
   const [srcA, setSrcA] = useState<string>(targetSrc);
   const [srcB, setSrcB] = useState<string>("");
 
-  // Handle source changes with cross-fade logic
-  useEffect(() => {
+  const [prevTargetSrc, setPrevTargetSrc] = useState(targetSrc);
+  if (targetSrc !== prevTargetSrc) {
+    setPrevTargetSrc(targetSrc);
     if (activeVideo === "A") {
-      if (srcA !== targetSrc) {
-        // Switch active video to B, load targetSrc into B
-        setSrcB(targetSrc);
-        setActiveVideo("B");
-      }
+      setSrcB(targetSrc);
+      setActiveVideo("B");
     } else {
-      if (srcB !== targetSrc) {
-        // Switch active video to A, load targetSrc into A
-        setSrcA(targetSrc);
-        setActiveVideo("A");
-      }
+      setSrcA(targetSrc);
+      setActiveVideo("A");
     }
-  }, [targetSrc, activeVideo, srcA, srcB]);
+  }
 
   // Ensure video element starts playing when source is loaded and active
   useEffect(() => {

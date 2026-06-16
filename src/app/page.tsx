@@ -5,7 +5,6 @@ import {
   ArrowRight,
   Shield,
   Zap,
-  Volume2,
   Cpu,
   Layers,
   Activity,
@@ -452,7 +451,7 @@ export default function Home() {
                 <div className="md:col-span-4 text-left space-y-8">
                   <div className="border-l-2 border-[#ff4b00] pl-4">
                     <h4 className="text-sm font-bold uppercase tracking-wider text-white">01 / Magnetic Flux</h4>
-                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Concentrated neodymium field provides high power output with extremely low spatial distortion.</p>
+                    <p className="text-xs text-[#b8b8b8] mt-1 font-light">Concentrated neodymium field provides high power output with reduced spatial distortion.</p>
                   </div>
                   <div className="border-l-2 border-white/25 pl-4 hover:border-[#ff4b00] transition-colors">
                     <h4 className="text-sm font-bold uppercase tracking-wider text-white">02 / Heat Dispersion</h4>
