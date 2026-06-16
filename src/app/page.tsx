@@ -211,7 +211,7 @@ export default function Home() {
       <Navbar />
 
       {/* 1. HERO VIEWPORT */}
-      <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center px-6 pt-28 pb-20">
+      <section className="relative w-full min-h-[100dvh] sm:min-h-screen overflow-hidden flex items-center justify-center px-6 pt-28 pb-20">
         {/* Full-bleed background video: Clearly visible at native 80% opacity set inside VideoSequence */}
         <div className="absolute inset-0 z-0 select-none pointer-events-none">
           <VideoSequence folderName={activeModel} />
@@ -260,16 +260,25 @@ export default function Home() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-[640px] flex flex-col text-left items-start sm:text-center sm:items-center sm:mx-auto md:text-left md:items-start md:ml-0 md:mr-auto p-6 md:p-8 rounded-[24px] transition-all duration-700 ease-in-out"
+            className="relative w-full max-w-[640px] flex flex-col text-left items-start sm:text-center sm:items-center sm:mx-auto md:text-left md:items-start md:ml-0 md:mr-auto px-5 sm:px-0 transition-all duration-700 ease-in-out"
             style={{
-              background: activeModel === "frames-video" ? "rgba(0,0,0,0.18)" : "rgba(0,0,0,0.32)",
-              backdropFilter: activeModel === "frames-video" ? "blur(4px)" : "blur(8px)",
-              WebkitBackdropFilter: activeModel === "frames-video" ? "blur(4px)" : "blur(8px)",
-              borderColor: "rgba(255,255,255,0.08)",
-              borderWidth: activeModel === "frames-video" ? "0px" : "1px",
-              boxShadow: activeModel === "frames-video" ? "none" : "0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3)",
+              background: "transparent",
+              border: "none",
+              boxShadow: "none",
+              backdropFilter: "none",
+              WebkitBackdropFilter: "none",
             }}
           >
+            {/* Cinematic localized radial scrim behind the text */}
+            <div
+              className="absolute pointer-events-none -z-10 select-none transition-all duration-700 ease-in-out inset-[-32px_-24px] sm:inset-[-40px_-50px] md:inset-[-40px_-70px] blur-[10px] sm:blur-[12px] md:blur-[16px] rounded-[40px]"
+              style={{
+                background: activeModel === "frames-video"
+                  ? "radial-gradient(ellipse at center, rgba(0,0,0,0.68) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.16) 75%, transparent 100%)"
+                  : "radial-gradient(ellipse at center, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.38) 40%, rgba(0,0,0,0.12) 70%, transparent 100%)",
+              }}
+            />
+
             {/* Eyebrow badge */}
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-[#050505]/80 border border-[#ff4b00]/25 mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(255,75,0,0.05)]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#ff4b00] animate-pulse" />
@@ -279,23 +288,38 @@ export default function Home() {
             </div>
 
             {/* Headline */}
-            <h1 className={`text-[clamp(3rem,7vw,6.5rem)] font-extrabold tracking-tight leading-[1.05] text-[#f5f5f5] drop-shadow-xl ${activeTab.typographyClass}`}>
+            <h1
+              className={`text-[clamp(3rem,7vw,6.5rem)] font-extrabold tracking-tight leading-[1.05] text-[#f5f5f5] drop-shadow-xl ${activeTab.typographyClass}`}
+              style={{
+                textShadow: "0 2px 10px rgba(0,0,0,0.6), 0 4px 20px rgba(0,0,0,0.3)",
+              }}
+            >
               {activeTab.headline}
             </h1>
 
             {/* Subheading */}
-            <h2 className="text-[clamp(1.2rem,2.5vw,1.8rem)] mt-5 text-[#ff4b00] font-bold tracking-wide uppercase font-display">
+            <h2
+              className="text-[clamp(1.2rem,2.5vw,1.8rem)] mt-6 text-[#ff4b00] font-extrabold tracking-wide uppercase font-display"
+              style={{
+                textShadow: "0 2px 8px rgba(0,0,0,0.6)",
+              }}
+            >
               {activeTab.subheading}
             </h2>
 
             {/* Body Description */}
-            <p className="text-base md:text-[17px] mt-5 text-[#b8b8b8] leading-[1.6] font-light max-w-2xl drop-shadow-md">
+            <p
+              className="text-base md:text-[17px] mt-6 text-[#d8d8d8] leading-[1.6] font-normal max-w-2xl"
+              style={{
+                textShadow: "0 2px 8px rgba(0,0,0,0.6)",
+              }}
+            >
               {activeTab.body}
             </p>
 
             {/* Action Buttons */}
             <div
-              className="flex flex-col sm:flex-row items-center gap-4 mt-8 w-full sm:w-auto justify-start sm:justify-center md:justify-start"
+              className="flex flex-col sm:flex-row items-center gap-4 mt-10 w-full sm:w-auto justify-start sm:justify-center md:justify-start"
             >
               <a
                 href="#engineering"
